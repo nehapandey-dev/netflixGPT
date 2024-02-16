@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react'
 import { auth } from '../utils/firebase';
 import { signOut } from "firebase/auth";
-import { useSelector } from 'react-redux';
-import { addUser, removeUser } from '../utils/userSlice';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router';
-import { onAuthStateChanged } from '@firebase/auth';
-import { API_OPTION } from '../utils/constant';
-import { addNowPlayingMovies } from '../utils/moviesSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import MainContainer from './MainContainer';
-
+import UseNowPlayingMovies from '../hooks/useNowPlayingMovies';
+import UsePopularMovies from '../hooks/usePopularMovies';
+import GPTSearch from './GPTSearch';
+import { toggleGptSearchView } from '../utils/gptSlice';
+import { changeLanguage } from '../utils/configSlice';
+import { Supported_Languages } from '../utils/constant';
 
 function BrowesPage() {
+  UseNowPlayingMovies()
+  UsePopularMovies()
   const dispatch = useDispatch()
-  const naviagte = useNavigate()
+  const showGptSearch = useSelector(store=>store.gpt.showGptSearch)
   const user = useSelector((store) => store.user)
   const handleSignOut = () => {
     signOut(auth).then(() => {
@@ -24,52 +25,40 @@ function BrowesPage() {
 
     });
   }
-  const getNowPlayingMovies = async()=>{
-    const data = await fetch('https://api.themoviedb.org/3/movie/now_playing?page=1', API_OPTION)
-    const json = await data.json()
-    // console.log(json);
-    dispatch(addNowPlayingMovies(json.results))
-  }
-  useEffect(()=>{
-    getNowPlayingMovies()
-  },[])
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
-        const { uid, email, dispalyName, photoURL } = user;
-        dispatch(addUser({
-          uid: uid,
-          email: email,
-          dispalyName: dispalyName,
-          photoURL: photoURL
-        }))
-        naviagte('/browsepage')
-      } else {
-        dispatch(removeUser)
-        naviagte('/')
-      }
-    });
-    // unsubscribe when component unmounts
-    return () => unsubscribe()
-  }
-    , [])
+const handleGptSearchClick =()=>{
+  dispatch(toggleGptSearchView())
+}
+
+const handleLanguageChange =(e)=>{
+dispatch(changeLanguage(e.target.value))
+}
   return (
     <div >
-      <div className='absolute  w-full from-black h-screen '>
-        <div className=' px-20 py-2 bg-gradient-to-br from-black flex justify-between'>
-          <img src='https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png'
-            alt='logo'
-            className='w-38 h-20' />
-          <div className='py-4 flex'>
-            <img src={user.photoURL} alt='' className='w-12 h-12 rounded-lg' />
-            <button className='bg-red text-white p-2 w-24 mx-3 rounded-md' onClick={handleSignOut}>Sign Out</button>
-          </div>
+      <div className='absolute  w-full  h-screen  px-20 py-2  flex justify-between bg-gradient-to-b from-black z-10'>
+
+        <img src='https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png'
+          alt='logo'
+          className='w-38 h-20' />
+        <div className='py-4 flex'>
+          {showGptSearch && (
+            <select className='p-2 bg-gray-800 text-white m-1 h-12 rounded-lg' onChange={handleLanguageChange}>
+            {Supported_Languages.map(lang=>
+              <option key={lang.identifier} className='bg-black text-white ' value={lang.identifier}>{lang.name}</option>)}
+            </select> 
+          )}
+         
+          <button className='p-2 px-4 mx-2 bg-purple-800 text-white w-32 h-12 rounded-lg'
+          onClick={handleGptSearchClick}
+          >
+            {showGptSearch? "Homepage" : "GPT Search"}
+            </button>
+          <img src={user.photoURL} alt='' className='w-12 h-12 rounded-lg' />
+          <button className='bg-red text-white p-2 w-24 h-12 mx-3 rounded-md' onClick={handleSignOut}>Sign Out</button>
         </div>
+
       </div>
       <div className='bg-white'>
-      <MainContainer/>
+        {showGptSearch? <GPTSearch/>:<MainContainer />}       
       </div>
     </div>
   )

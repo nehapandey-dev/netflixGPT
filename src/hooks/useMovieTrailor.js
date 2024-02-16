@@ -9,9 +9,9 @@ function UseMovieTrailor() {
     const getMovieVedios = async () => {
         const data = await fetch('https://api.themoviedb.org/3/movie/933131/videos?language=en-US', API_OPTION)
         const json = await (data.json())
-        console.log(json);
-        const trailer = json.results.filter(video => video.type === "Trailer")
-        console.log(trailer);
+        // console.log(json);
+        const trailer = json.dates.results.filter(video => video.type === "Trailer")
+        // console.log(trailer);
         dispatch(addTrailorVideo(trailer))
     }
     useEffect(() => {

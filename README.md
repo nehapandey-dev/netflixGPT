@@ -29,6 +29,16 @@
    - update store with trailor vedio data
    - embded the youtube video and make it auto play and mute
    - Tailwind classes to make main contaier look awesom
+   - Build secondary component
+   - Build movie list
+   - Build movie card
+   - TMDB image CDN link
+   - Made the brows page amazing with Tailwind css
+   - usePopular movies custome hooks
+   - GPT search Page
+   - GPT search bar
+   - (Bonus)Multi language feature in our App
+   - Intregrate GPT API'S
    
 
 # FEATURES

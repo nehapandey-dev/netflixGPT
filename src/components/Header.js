@@ -2,11 +2,16 @@
 import React from 'react'
 
 import { Link } from 'react-router-dom'
-import { logo } from '../utils/constant'
+import { Supported_Languages, logo } from '../utils/constant'
+import { useDispatch } from 'react-redux'
+import { changeLanguage } from '../utils/configSlice'
 
 
 export default function Header() {
- 
+  const dispatch = useDispatch()
+ const handleLanguageChange =(e)=>{
+dispatch(changeLanguage(e.target.value))
+ }
   return (
     <div className='absolute  w-full bg-gradient-to-tr from-black h-screen '>
     <div className=' px-20 py-2 bg-gradient-to-br from-black flex justify-between'>
@@ -14,10 +19,10 @@ export default function Header() {
         alt='logo' 
         className='w-38 h-20'/>
        <div className='py-4'>
-       <select className='bg-black text-white p-2 w-32 border border-border rounded-md'>
-            <option className='bg-black text-white '>English</option>
-            <option>Hindi</option>
-        </select>
+        <select className='p-2 bg-gray-800 text-white m-2' onChange={handleLanguageChange}>
+        {Supported_Languages.map(lang=>
+          <option key={lang.identifier} className='bg-black text-white ' value={lang.identifier}>{lang.name}</option>)}
+        </select>     
         <Link to={'/signin'}><button className='bg-red text-white p-2 w-24 mx-3 rounded-md'>Sign In</button></Link>
        </div>
     </div>
