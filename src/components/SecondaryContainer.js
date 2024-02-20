@@ -1,5 +1,5 @@
 import React from 'react'
-import MovieList from './MovieList'
+import MovieList from '../components/MovieList'
 import { useSelector } from 'react-redux'
 
 function SecondaryContainer() {
@@ -8,13 +8,13 @@ function SecondaryContainer() {
     return (
         <div className='bg-black'>
             <div className='-mt-52 pl-12 relative z-20 text-white'>
-                <MovieList title={"Now Playing"} movies={movies.nowPlayingMovies} />
+                <MovieList title={"Now Playing"} movies={movies?.nowPlayingMovies} />
 
-                {/* <MovieList title={"Popular"} movies={movies.popularMovies} /> */}
+                <MovieList title={"Popular"} movies={movies?.popularMovies} />
 
-                <MovieList title={"Trending"} movies={movies.nowPlayingMovies} />
+                <MovieList title={"Trending"} movies={movies?.nowPlayingMovies} />
 
-                <MovieList title={"Horor"} movies={movies.nowPlayingMovies} />
+                <MovieList title={"Horor"} movies={movies?.nowPlayingMovies} />
             </div>
 
         </div>

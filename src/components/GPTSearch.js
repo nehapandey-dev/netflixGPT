@@ -6,11 +6,11 @@ import { BG_URL } from '../utils/constant'
 function GPTSearch() {
     return (
         <div className='bg-transparent'>
-            <div className='absolute -z-10 bg-transparent'>
-            <img src={BG_URL} alt='main' />
+            <div className='fixed -z-10 '>
+                <img src={BG_URL} alt='main' />
             </div>
-            <GptSearchBar/>
-            <GptMovieSuggestion/>
+            <GptSearchBar />
+            <GptMovieSuggestion />
         </div>
     )
 }

@@ -9,7 +9,7 @@ function MovieList({ title, movies }) {
                 <h1 className='text-3xl py-4'>{title}</h1>
             </div>
             <div className='flex overflow-x-scroll'>
-                {movies.map((movie) => <MovieCards key={movie.id} posterPath={movie.poster_path} />)}
+                {movies?.map(movie => <MovieCards key={movie?.id} posterPath={movie?.poster_path} />)}
             </div>
         </div>
     )
