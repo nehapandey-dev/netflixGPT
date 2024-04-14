@@ -34,11 +34,11 @@ dispatch(changeLanguage(e.target.value))
 }
   return (
     <div className='bg-transparent'>
-      <div className='absolute  px-20 py-2  flex justify-between bg-gradient-to-b from-black z-10 w-screen'>
+      <div className='absolute  px-20 py-2 bg-gradient-to-b from-black z-10 w-screen flex flex-col md:flex-row  md:justify-between'>
 
         <img src='https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png'
           alt='logo'
-          className='w-38 h-20' />
+          className='w-44 mx-auto md:mx-0' />
         <div className='py-4 flex'>
           {showGptSearch && (
             <select className='p-2 bg-gray-800 text-white m-1 h-12 rounded-lg' onChange={handleLanguageChange}>

@@ -13,11 +13,11 @@ export default function Header() {
 dispatch(changeLanguage(e.target.value))
  }
   return (
-    <div className='absolute  w-full bg-gradient-to-tr from-black h-screen '>
-    <div className=' px-20 py-2 bg-gradient-to-br from-black flex justify-between'>
+    <div className='absolute  w-screen bg-gradient-to-tr from-black h-screen '>
+    <div className=' px-20 py-2 bg-gradient-to-br from-black flex flex-col md:flex-row  md:justify-between bg-blck '>
         <img src={logo} 
         alt='logo' 
-        className='w-38 h-20'/>
+        className='w-44 mx-auto md:mx-0'/>
        <div className='py-4'>
         <select className='p-2 bg-gray-800 text-white m-2' onChange={handleLanguageChange}>
         {Supported_Languages.map(lang=>

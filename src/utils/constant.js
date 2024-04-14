@@ -4,11 +4,12 @@ export const API_OPTION = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: 'Bearer'+ process.env.REACT_APP_TMDB_KEY
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiZTc3MjAxOGIxZjI3YjljN2ZjOWY5NjNlY2JjMjEyNCIsInN1YiI6IjY1YzYxN2Y3OTRkOGE4MDE4MzEyNjlmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9QwKka9262cyu9QfexA-z0o3A_0iNmG9GAWnZpYKyFg'
     }
   };
 
 export const IMG_CDN_URL = 'https://image.tmdb.org/t/p/w400'
 export const BG_URL = 'https://assets.nflxext.com/ffe/siteui/vlv3/4da5d2b1-1b22-498d-90c0-4d86701dffcc/98a1cb1e-5a1d-4b98-a46f-995272b632dd/IN-en-20240129-popsignuptwoweeks-perspective_alpha_website_large.jpg' 
 export const Supported_Languages = [{identifier : 'en', name : 'English'},{identifier : 'hindi', name : 'Hindi'}]
-export const OPEN_AI_KEY = process.env.REACT_APP_OPEN_AI_KEY
+export const OPEN_AI_KEY = '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'
+// process.env.REACT_APP_OPEN_AI_KEY

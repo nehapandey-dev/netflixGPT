@@ -8,7 +8,7 @@ function Login() {
 
     <div className='bg-transparent'>
       <Header />
-      <img src={BG_URL} alt='main' />
+      <img src={BG_URL} alt='main' className='h-screen object-cover'/>
     </div>
 
   )

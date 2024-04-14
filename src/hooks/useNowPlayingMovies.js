@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addUser, removeUser } from '../utils/userSlice'
 import { useNavigate } from 'react-router-dom'
 import { onAuthStateChanged } from '@firebase/auth';
@@ -10,6 +10,7 @@ import { auth } from '../utils/firebase';
 function UseNowPlayingMovies() {
     const dispatch = useDispatch()
     const naviagte = useNavigate()
+    const nowPlayingMovies = useSelector(store=>store.movies.nowPlayingMovies)
     const getNowPlayingMovies = async()=>{
         const data = await fetch('https://api.themoviedb.org/3/movie/now_playing?page=1', API_OPTION)
         const json = await data.json()
@@ -17,7 +18,7 @@ function UseNowPlayingMovies() {
         dispatch(addNowPlayingMovies(json.results))
       }
       useEffect(()=>{
-        getNowPlayingMovies()
+        if(!nowPlayingMovies)getNowPlayingMovies()
       },[])
       useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {

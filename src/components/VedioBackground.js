@@ -7,7 +7,7 @@ function VedioBackground() {
     // fetch trailer vedio
    
     return (
-        <div className='w-full'>
+        <div className='w-screen'>
             <iframe 
             className='w-screen aspect-video'
             src={"https://www.youtube.com/embed/7u3zBVAxx_w?si=V7kboC2Sf1zVn_1j&autoplay=1&mute=1"} 
