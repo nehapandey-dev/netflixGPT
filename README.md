@@ -1,6 +1,5 @@
 `Netflix GPT`
 
-
 - login /signup 
    - signin /signup form 
    - redirect to home page
@@ -45,7 +44,7 @@
    - reused movies list component to make movie suggestion container
    - Memoization
    - learned how to add .env file to gitignore
-   - made this site responsive
+   - pending task : made this site responsive ✅
    
 
 # FEATURES
